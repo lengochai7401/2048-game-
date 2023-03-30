@@ -237,17 +237,16 @@ combine = (arr, direction) => {
         // Combine values from left to right or top to bottom
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] !== 0) {
-                // Check for a matching value 1 or 2 cells away
-                for (let j = i + 1; j < arr.length && j <= i + 2; j++) {
-                    if (arr[i] === arr[j]) {
-                        // Merge the matching values
-                        arr[i] += arr[j];
-                        arr[j] = 0;
-                        score += arr[i];
-                        gameWon = (arr[i] === 2048);
-                        break;
-                    } else if (arr[j] !== 0) {
-                        // Stop looking for a match if a non-zero value is found
+                // Check for a matching value to the right or below
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[j] !== 0) {
+                        if (arr[i] === arr[j]) {
+                            // Merge the matching values
+                            arr[i] += arr[j];
+                            arr[j] = 0;
+                            score += arr[i];
+                            gameWon = (arr[i] === 2048);
+                        }
                         break;
                     }
                 }
@@ -257,17 +256,16 @@ combine = (arr, direction) => {
         // Combine values from right to left or bottom to top
         for (let i = arr.length - 1; i >= 0; i--) {
             if (arr[i] !== 0) {
-                // Check for a matching value 1 or 2 cells away
-                for (let j = i - 1; j >= 0 && j >= i - 2; j--) {
-                    if (arr[i] === arr[j]) {
-                        // Merge the matching values
-                        arr[i] += arr[j];
-                        arr[j] = 0;
-                        score += arr[i];
-                        gameWon = (arr[i] === 2048);
-                        break;
-                    } else if (arr[j] !== 0) {
-                        // Stop looking for a match if a non-zero value is found
+                // Check for a matching value to the left or above
+                for (let j = i - 1; j >= 0; j--) {
+                    if (arr[j] !== 0) {
+                        if (arr[i] === arr[j]) {
+                            // Merge the matching values
+                            arr[i] += arr[j];
+                            arr[j] = 0;
+                            score += arr[i];
+                            gameWon = (arr[i] === 2048);
+                        }
                         break;
                     }
                 }
